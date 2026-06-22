@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一段关于稳定入口的叙述 · ng28</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f3ee;
+            color: #2b2b2b;
+            line-height: 1.7;
+        }
+
+        /* 深色头图 — 偏故事感的渐变与留白 */
+        .hero {
+            background: linear-gradient(145deg, #22272e 0%, #2c313a 100%);
+            padding: 6rem 2rem 4rem 2rem;
+            text-align: center;
+            color: #e8e4da;
+            border-bottom: 1px solid #3f454e;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+            color: #f0ede6;
+        }
+
+        .hero .lead {
+            font-size: 1.05rem;
+            max-width: 640px;
+            margin: 0 auto;
+            color: #b9b5aa;
+            font-weight: 350;
+        }
+
+        /* 正文浅色区 — 柔和又清晰的呼吸感 */
+        .container {
+            max-width: 880px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 5rem 2rem;
+        }
+
+        .story-block {
+            background: #ffffff;
+            padding: 2.8rem 2.5rem;
+            border-radius: 28px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+            margin-bottom: 2.8rem;
+        }
+
+        .story-block p {
+            margin-bottom: 1.6rem;
+            font-size: 1rem;
+        }
+
+        .story-block p:last-child {
+            margin-bottom: 0;
+        }
+
+        .story-block a {
+            color: #9f7240;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            font-weight: 500;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .story-block a:hover {
+            color: #7d5b32;
+            border-bottom-color: #b8895a;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+            padding: 0.8rem 0 0.2rem 0;
+            margin: 1.8rem 0 0.8rem 0;
+            list-style: none;
+        }
+
+        .feature-list li {
+            flex: 1 1 200px;
+            padding-left: 0.4rem;
+            font-size: 0.96rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.4rem;
+        }
+
+        .feature-list li::before {
+            content: "·";
+            color: #9f7240;
+            font-weight: 700;
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        .faq-summary {
+            margin-top: 2rem;
+            padding-top: 1.6rem;
+            border-top: 1px solid #e6e0d6;
+        }
+
+        .faq-summary details {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .faq-summary details summary {
+            cursor: pointer;
+            font-weight: 500;
+            color: #3d3a34;
+            padding: 0.3rem 0;
+            transition: color 0.15s;
+        }
+
+        .faq-summary details summary:hover {
+            color: #9f7240;
+        }
+
+        .faq-summary details p {
+            margin: 0.6rem 0 0.8rem 0.8rem;
+            color: #5a554c;
+        }
+
+        .mild-footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #7d7a74;
+            font-size: 0.9rem;
+            border-top: 1px solid #e0dad1;
+            padding-top: 2.5rem;
+        }
+
+        .mild-footer a {
+            color: #7f623f;
+            text-decoration: none;
+            border-bottom: 1px dotted #c0b09b;
+        }
+
+        .mild-footer a:hover {
+            border-bottom-style: solid;
+            color: #5c442a;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+
+            .hero {
+                padding: 4rem 1.2rem 3rem 1.2rem;
+            }
+
+            .container {
+                padding: 2rem 1.2rem 3.5rem 1.2rem;
+            }
+
+            .story-block {
+                padding: 2rem 1.5rem;
+            }
+
+            .feature-list {
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+
+            .feature-list li {
+                flex: 1 1 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图：开场短句 -->
+    <header class="hero">
+        <h1>一段关于稳定入口的叙述</h1>
+        <p class="lead">有些地方，不需要太多修饰，安静地站在那里就好。<br>比如一个你愿意反复回去的页面。</p>
+    </header>
+
+    <main class="container">
+
+        <!-- 承接段落 + 特点列表 + FAQ 摘要 -->
+        <div class="story-block">
+
+            <p>
+                最初认识 <a href="https://cns-ng28.com">ng28</a> 是因为一个很平常的下午。那时在找一处能安静了解信息的地方——没有弹窗的干扰，没有夸张的横幅，页面打开之后就是它本来的样子。后来用得久了，慢慢觉得它像一本常翻常新的笔记：不需要每次重新适应，布局和入口都待在熟悉的位置。
+            </p>
+
+            <p>
+                很多人习惯把常用的站点放在书签栏，但偶尔重装系统或换设备之后，最怕的就是那个入口找不到了。其实入口本身并不复杂——知道在哪里，手指敲几个字母就到了。但前提是它一直稳定，不会突然改头换面，也不会莫名消失。对我来说，<a href="https://cns-ng28.com">ng28</a> 就是这样一种存在：它不追求惊艳，却在每一次需要的时候都能被找到。
+            </p>
+
+            <!-- 特点列表 -->
+            <ul class="feature-list">
+                <li>页面结构清晰，主要功能区域一眼可辨</li>
+                <li>减少不必要的跳转，信息层级直观</li>
+                <li>加载轻快，无论网络状态如何都能快速响应</li>
+                <li>配色温和，长时间浏览不易疲劳</li>
+                <li>没有隐藏的诱导广告或自动播放元素</li>
+            </ul>
+
+            <!-- FAQ 摘要 -->
+            <div class="faq-summary">
+                <details>
+                    <summary>每次访问都是同样的界面吗？会不会有突然的变动？</summary>
+                    <p>整体布局保持稳定，偶尔会有细节优化，但核心入口和页面结构不会突然大改。你记住的那个位置，下次再来时通常不会落空。</p>
+                </details>
+                <details>
+                    <summary>是否需要注册或登录才能看到完整内容？</summary>
+                    <p>不需要。页面本身面向所有访客开放，所有信息都可以直接浏览。如果需要更多个性化功能，页面也会有相应的提示。</p>
+                </details>
+                <details>
+                    <summary>在移动设备上浏览体验如何？</summary>
+                    <p>字体和间距会自适应屏幕大小，按钮和链接的大小也适合手指触摸。手机浏览器和电脑上的体验一样顺畅。</p>
+                </details>
+            </div>
+
+        </div>
+
+        <!-- 温和结尾 -->
+        <div class="story-block" style="background: #faf8f5; border: 1px solid #eae3d9; box-shadow: none;">
+            <p style="font-style: italic; color: #4f4a42;">
+                所以，如果你也在找一个可以安心记住的页面——不需要反复确认地址，不必担心下次找不到——不妨把 <a href="https://cns-ng28.com">ng28</a> 放在心里一个安静的角落。它不喧哗，但你知道它一直在。
+            </p>
+        </div>
+
+        <!-- 页脚：低调收束 -->
+        <div class="mild-footer">
+            <p>写于一个平常的日子 · 页面内容仅为个人感受<br>
+            如需直接访问，可使用 <a href="https://cns-ng28.com">ng28</a> 链接。</p>
+        </div>
+
+    </main>
+
+</body>
+</html>
